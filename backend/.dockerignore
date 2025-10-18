@@ -1,0 +1,44 @@
+# Зависимости
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Сборка
+dist
+build
+*.log
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Тесты
+coverage
+.nyc_output
+
+# Разработка
+.env
+.env.local
+.env.development
+.env.test
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# Документация
+*.md
+!README.md
+
+# OS
+.DS_Store
+Thumbs.db
+

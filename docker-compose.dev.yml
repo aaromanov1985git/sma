@@ -1,0 +1,81 @@
+version: '3.8'
+
+# Конфигурация для разработки (Development)
+services:
+  # ========================================
+  # PostgreSQL Database
+  # ========================================
+  postgres:
+    image: postgres:14-alpine
+    container_name: waybill-postgres-dev
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: waybill_verification
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - waybill-network
+
+  # ========================================
+  # Backend API (Development mode с hot-reload)
+  # ========================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: waybill-backend-dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: 3001
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      DB_DATABASE: waybill_verification
+      JWT_SECRET: dev-secret-key
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: http://localhost:3000
+    ports:
+      - "3001:3001"
+      - "9229:9229"  # Debug port
+    volumes:
+      - ./backend/src:/app/src
+      - ./backend/node_modules:/app/node_modules
+    depends_on:
+      - postgres
+    networks:
+      - waybill-network
+    command: npm run start:dev
+
+  # ========================================
+  # Frontend (Development mode с hot-reload)
+  # ========================================
+  frontend:
+    image: node:18-alpine
+    container_name: waybill-frontend-dev
+    restart: unless-stopped
+    working_dir: /app
+    environment:
+      - VITE_API_URL=http://localhost:3001/api
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - waybill-network
+    command: npm run dev -- --host
+
+networks:
+  waybill-network:
+    driver: bridge
+
+volumes:
+  postgres_data_dev:
+    driver: local
+

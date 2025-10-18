@@ -1,0 +1,48 @@
+{
+  "name": "waybill-verification-system",
+  "version": "2.0.1",
+  "description": "Система сверки путевых листов между данными 1С и данными заказчика",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "lucide-react": "^0.344.0",
+    "xlsx": "^0.18.5",
+    "zustand": "^4.5.0",
+    "date-fns": "^3.3.1",
+    "react-leaflet": "^4.2.1",
+    "leaflet": "^1.9.4",
+    "recharts": "^2.12.0",
+    "react-hot-toast": "^2.4.1",
+    "clsx": "^2.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "vite": "^5.1.4",
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5"
+  },
+  "keywords": [
+    "waybill",
+    "verification",
+    "1c",
+    "excel",
+    "transport"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

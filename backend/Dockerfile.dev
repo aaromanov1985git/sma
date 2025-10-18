@@ -1,0 +1,19 @@
+# Dockerfile для разработки (Development)
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Устанавливаем зависимости
+COPY package*.json ./
+RUN npm install
+
+# Копируем остальные файлы
+COPY . .
+
+# Открываем порты
+EXPOSE 3001
+EXPOSE 9229
+
+# Запускаем в режиме разработки с hot-reload
+CMD ["npm", "run", "start:dev"]
+
